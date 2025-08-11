@@ -1,40 +1,64 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   SparklesIcon,
   PaperAirplaneIcon,
   HeartIcon,
 } from "@heroicons/react/24/solid";
 
-const WishBox = () => {
-  const [wishList, setWishList] = useState([
-    {
-      name: "Nguyễn Văn A",
-      message: "Chúc mừng ngày trọng đại của hai bạn! Chúc mãi mãi hạnh phúc bên nhau.",
-    },
-    {
-      name: "Trần Thị B",
-      message: "Chúc hai bạn trăm năm hạnh phúc, vạn sự như ý!",
-    },
-    {
-      name: "Lê Văn C",
-      message: "Thật vui khi được chung vui cùng hai bạn! Chúc hạnh phúc viên mãn.",
-    },
-  ]);
+const API_BASE = "https://invite-wedding-be.onrender.com";
 
+const WishBox = () => {
+  const [wishList, setWishList] = useState([]);
   const [newName, setNewName] = useState("");
   const [newMessage, setNewMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const wishBoxRef = useRef(null);
 
-  const handleAddWish = (e) => {
+  const fetchWishes = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_BASE}/api/wishes`);
+      if (!res.ok) throw new Error("Failed to fetch wishes");
+      const data = await res.json();
+      setWishList(data);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchWishes();
+  }, [fetchWishes]);
+
+  const handleAddWish = async (e) => {
     e.preventDefault();
-    if (newName && newMessage) {
-      setWishList([...wishList, { name: newName, message: newMessage }]);
+    if (!newName.trim() || !newMessage.trim()) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_BASE}/api/wishes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newName.trim(), message: newMessage.trim() }),
+      });
+      if (!res.ok) throw new Error("Failed to add wish");
+      const addedWish = await res.json();
+
+      setWishList((prev) => [addedWish, ...prev]);
       setNewName("");
       setNewMessage("");
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Hiệu ứng trái tim trong WishBox
+  // Hiệu ứng trái tim trong WishBox (giữ nguyên)
   useEffect(() => {
     const createLoveEffect = () => {
       const loveContainer = document.createElement("div");
@@ -111,6 +135,7 @@ const WishBox = () => {
               style={{ backgroundColor: "#ffffff", borderColor: "#C29897" }}
               placeholder="Nhập tên của bạn"
               required
+              disabled={loading}
             />
           </div>
           <div>
@@ -130,44 +155,55 @@ const WishBox = () => {
               style={{ backgroundColor: "#ffffff", borderColor: "#C29897" }}
               placeholder="Nhập lời chúc của bạn..."
               required
+              disabled={loading}
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 text-white font-bold rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="w-full py-3 text-white font-bold rounded-lg shadow-lg transition-transform transform hover:scale-105 disabled:opacity-50"
             style={{ backgroundColor: "#C29897" }}
+            disabled={loading}
           >
-            Gửi lời chúc
+            {loading ? "Đang gửi..." : "Gửi lời chúc"}
           </button>
         </form>
+        {error && (
+          <p className="mt-2 text-center text-red-600 font-semibold">{error}</p>
+        )}
       </div>
 
       {/* Danh sách lời chúc */}
       <div className="max-w-lg mx-auto grid grid-cols-1 gap-6">
-        {wishList.map((wish, index) => (
-          <div
-            key={index}
-            className="p-5 shadow-2xl rounded-lg border transform hover:-translate-y-1 transition-transform"
-            style={{
-              backgroundColor: "#ffffff",
-              borderColor: "#C29897",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            <p className="text-lg mb-3" style={{ color: "#4B2E39" }}>
-              &quot;{wish.message}&quot;
-            </p>
-            <p
-              className="text-md font-semibold text-right"
-              style={{ color: "#803F47" }}
+        {loading && wishList.length === 0 ? (
+          <p className="text-center text-[#803F47] font-semibold">Đang tải lời chúc...</p>
+        ) : wishList.length === 0 ? (
+          <p className="text-center text-[#803F47] font-semibold">Chưa có lời chúc nào.</p>
+        ) : (
+          wishList.map((wish, index) => (
+            <div
+              key={wish._id || index}
+              className="p-5 shadow-2xl rounded-lg border transform hover:-translate-y-1 transition-transform"
+              style={{
+                backgroundColor: "#ffffff",
+                borderColor: "#C29897",
+                backdropFilter: "blur(10px)",
+              }}
             >
-              - {wish.name}
-            </p>
-            <div className="flex justify-end mt-4">
-              <HeartIcon className="h-5 w-5 text-pink-400 animate-ping" />
+              <p className="text-lg mb-3" style={{ color: "#4B2E39" }}>
+                &quot;{wish.message}&quot;
+              </p>
+              <p
+                className="text-md font-semibold text-right"
+                style={{ color: "#803F47" }}
+              >
+                - {wish.name}
+              </p>
+              <div className="flex justify-end mt-4">
+                <HeartIcon className="h-5 w-5 text-pink-400 animate-ping" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

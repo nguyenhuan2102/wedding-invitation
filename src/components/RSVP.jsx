@@ -2,14 +2,45 @@ import { useState } from 'react';
 import { UserIcon, EnvelopeIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 import "../style/RSVP.css"; // Đảm bảo file CSS tồn tại
 
+const API_BASE = "https://invite-wedding-be.onrender.com";
+
 const RSVP = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [attending, setAttending] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Cảm ơn ${name} đã xác nhận tham dự!`);
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const response = await fetch(`${API_BASE}/api/survey`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, attending }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Lỗi khi gửi xác nhận');
+      }
+
+      const data = await response.json();
+      setMessage(
+        data.attending === 'yes'
+          ? `Cảm ơn ${data.name} đã xác nhận tham dự!`
+          : `Cảm ơn ${data.name} đã phản hồi, rất tiếc bạn không thể tham dự.`
+      );
+      setName('');
+      setEmail('');
+      setAttending('');
+    } catch (error) {
+      setMessage(error.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,6 +66,7 @@ const RSVP = () => {
               className="w-full p-3 border border-[#D8B5B4] rounded-lg text-[#C29897] placeholder-[#C29897] bg-white focus:ring-2 focus:ring-[#C29897] focus:outline-none transition duration-300"
               required
               placeholder="Nhập họ và tên"
+              disabled={loading}
             />
           </div>
           <div className="mb-6">
@@ -50,6 +82,7 @@ const RSVP = () => {
               className="w-full p-3 border border-[#D8B5B4] rounded-lg text-[#C29897] placeholder-[#C29897] bg-white focus:ring-2 focus:ring-[#C29897] focus:outline-none transition duration-300"
               required
               placeholder="Nhập email của bạn"
+              disabled={loading}
             />
           </div>
           <div className="mb-6">
@@ -63,6 +96,7 @@ const RSVP = () => {
               onChange={(e) => setAttending(e.target.value)}
               className="w-full p-3 border border-[#D8B5B4] rounded-lg bg-white text-[#C29897] focus:ring-2 focus:ring-[#C29897] focus:outline-none transition duration-300"
               required
+              disabled={loading}
             >
               <option value="">Vui lòng chọn</option>
               <option value="yes">Có, tôi sẽ đến</option>
@@ -71,12 +105,18 @@ const RSVP = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-[#C29897] text-white font-bold rounded-lg shadow-md hover:bg-[#D9B2AF] transition-all duration-300"
+            disabled={loading}
+            className="w-full py-3 bg-[#C29897] text-white font-bold rounded-lg shadow-md hover:bg-[#D9B2AF] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Gửi Xác Nhận
+            {loading ? 'Đang gửi...' : 'Gửi Xác Nhận'}
           </button>
         </form>
+
+        {message && (
+          <p className="mt-4 text-center text-[#803F47] font-semibold">{message}</p>
+        )}
       </div>
+
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {[...Array(30)].map((_, i) => (
           <div
@@ -89,7 +129,7 @@ const RSVP = () => {
               height: `${Math.random() * 8 + 3}rem`,
               opacity: Math.random(),
               animation: `float ${Math.random() * 20 + 10}s infinite ease-in-out`,
-              backgroundImage: "url('path_to_heart_image.png')", // Thay bằng đường dẫn ảnh trái tim của bạn
+              backgroundImage: "url('path_to_heart_image.png')",
               backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
