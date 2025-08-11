@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 import "../style/Welcome.css";
 
 const Welcome = ({ onInvitationOpen }) => {
@@ -43,19 +44,23 @@ const Welcome = ({ onInvitationOpen }) => {
           Welcome to Our Wedding
         </h1>
         <p className="text-5xl text-[#f7e1de] custom-nama zoom-text">
-          Reza & Calista
+          Văn Huấn &amp; Kim Chi
         </p>
         <button
           onClick={handleClick}
           className="mt-20 px-8 py-3 bg-gradient-to-r from-[#ce938f] to-[#cc8b85] text-white rounded-full shadow-lg hover:from-[#EDD0CD] hover:to-[#F1DDDB] transition duration-300 animate-pulse font-serif zoom-button"
         >
           <span className="flex items-center font-bold">
-            Buka Undangan
+            Mở thiệp mời
           </span>
         </button>
       </div>
     </div>
   );
+};
+
+Welcome.propTypes = {
+  onInvitationOpen: PropTypes.func.isRequired,
 };
 
 export default Welcome;

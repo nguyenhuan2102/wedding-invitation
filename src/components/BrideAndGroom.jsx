@@ -1,4 +1,3 @@
-import React from 'react';
 import '../style/BrideAndGroom.css';
 
 const BrideAndGroom = () => {
@@ -10,10 +9,11 @@ const BrideAndGroom = () => {
         </div>
         <div className="portrait-details">
           <h2 className="name tracking-wider text-[#aa8787] animate-pulse">
-            Calista
+            Nguyễn Thị Kim Chi
           </h2>
-          <p className="info text-[#a08c8a]">Lahir: 12 Mei 1990</p>
-          <p className="info text-[#a4706f]">Orang Tua: John Doe & Jane Doe</p>
+          <p className="info text-[#a08c8a]">Trưởng nữ</p>
+          <p className="info text-[#a4706f]">Cha mẹ: Nguyễn Văn N &amp; Trần Thị B</p>
+          <p className="info text-[#a4706f]">Tân Dân, Hà Tĩnh</p>
         </div>
       </div>
       <div className="portrait-wrapper">
@@ -22,10 +22,11 @@ const BrideAndGroom = () => {
         </div>
         <div className="portrait-details">
           <h2 className="name tracking-wider text-[#aa8787] animate-pulse">
-            Reza Arap
+            Nguyễn Văn Huấn
           </h2>
-          <p className="info text-[#a08c8a]">Lahir: 25 Agustus 1989</p>
-          <p className="info text-[#a4706f]">Orang Tua: Michael Arap & Sarah Arap</p>
+          <p className="info text-[#a08c8a]">Thứ nam</p>
+          <p className="info text-[#a4706f]">Cha mẹ: Nguyễn Văn T &amp; Ngô Thị S</p>
+          <p className="info text-[#a4706f]">Phúc Lộc, Nghệ An</p>
         </div>
       </div>
     </div>

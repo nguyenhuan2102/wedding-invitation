@@ -12,9 +12,10 @@ import Footer from "../components/Footer";
 import Welcome from "../components/Welcome";
 import FloatingMusicPlayer from "../components/FloatingMusicPlayer";
 import BrideAndGroom from "../components/BrideAndGroom";
+import ThankYou from "../components/ThankYou";
 
 const LandingPage = () => {
-  const weddingDate = new Date("2024-12-31T00:00:00");
+  const weddingDate = new Date("2025-12-31T00:00:00");
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -61,6 +62,9 @@ const LandingPage = () => {
             </div>
             <div id="testimonials">
               <Testimonials />
+            </div>
+            <div id="thank-you">
+              <ThankYou />
             </div>
             <div id="footer">
               <Footer />

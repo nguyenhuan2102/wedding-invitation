@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { PlayIcon, PauseIcon } from "@heroicons/react/24/outline";
 
 const FloatingMusicPlayer = ({ isPlaying, setIsPlaying }) => {
@@ -33,6 +34,10 @@ const FloatingMusicPlayer = ({ isPlaying, setIsPlaying }) => {
       </button>
     </div>
   );
+};
+FloatingMusicPlayer.propTypes = {
+  isPlaying: PropTypes.bool.isRequired,
+  setIsPlaying: PropTypes.func.isRequired,
 };
 
 export default FloatingMusicPlayer;

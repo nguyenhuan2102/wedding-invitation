@@ -10,13 +10,13 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import "../style/EventDetails.css";
 
-// Konfigurasi Peta
+// Tọa độ Đà Nẵng
 const center = {
-  lat: -6.200000, // Latitude dummy
-  lng: 106.816666, // Longitude dummy
+  lat: 16.047079, // Latitude Đà Nẵng
+  lng: 108.206230, // Longitude Đà Nẵng
 };
 
-// Konversi SVG ke Data URL
+// Icon trái tim trên bản đồ
 const iconSVG = `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-[#F1A6A6]">
     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -47,7 +47,7 @@ const EventDetails = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Call on mount to check initial state
+    handleScroll(); // Kiểm tra ngay khi load
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -55,19 +55,16 @@ const EventDetails = () => {
   return (
     <div className="relative py-12 bg-gradient-to-r from-[#F1DDDB] via-[#EDD0CD] to-[#D9B2AF] text-center overflow-hidden">
       <h2
-        className={`text-4xl font-extrabold tracking-wider text-[#C29897] mb-8 ${
-          isShaking ? "animate-shake" : ""
-        }`}
+        className={`text-4xl font-extrabold tracking-wider text-[#C29897] mb-8 ${isShaking ? "animate-shake" : ""}`}
         ref={eventDetailsRef}
       >
-        Event Details
+        Thông tin sự kiện
       </h2>
       <div className="max-w-4xl mx-auto space-y-6">
-        {/* Card Container */}
         {[
-          { icon: <CalendarIcon />, label: "Date:", value: "[Tanggal Pernikahan]" },
-          { icon: <ClockIcon />, label: "Time:", value: "[Waktu Pernikahan]" },
-          { icon: <MapPinIcon />, label: "Location:", value: "[Lokasi Pernikahan]" }
+          { icon: <CalendarIcon />, label: "Ngày:", value: "31/12/2025" },
+          { icon: <ClockIcon />, label: "Giờ:", value: "11h" },
+          { icon: <MapPinIcon />, label: "Địa điểm:", value: "456A Nguyễn Tri Phương, Đà Nẵng" }
         ].map((item, index) => (
           <div
             key={index}
@@ -85,7 +82,7 @@ const EventDetails = () => {
         ))}
       </div>
       <div className="relative py-12 mx-4 md:mx-8 lg:mx-16">
-        <h3 className="text-3xl font-bold text-[#C29897] mb-6">Find Us Here</h3>
+        <h3 className="text-3xl font-bold text-[#C29897] mb-6">Tìm chúng tôi tại đây</h3>
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
           <MapContainer center={center} zoom={15} style={{ height: "400px", width: "100%" }}>
             <TileLayer
@@ -94,7 +91,7 @@ const EventDetails = () => {
             />
             <Marker position={center} icon={customIcon}>
               <Popup>
-                Wedding Location
+                456A Nguyễn Tri Phương, Đà Nẵng
               </Popup>
             </Marker>
           </MapContainer>
@@ -104,7 +101,7 @@ const EventDetails = () => {
         {[...Array(15)].map((_, i) => (
           <HeartIcon
             key={i}
-            className={`h-24 w-24 text-pink-300 opacity-50 absolute`}
+            className="h-24 w-24 text-pink-300 opacity-50 absolute"
             style={{
               top: `${Math.random() * 100}vh`,
               left: `${Math.random() * 100}vw`,

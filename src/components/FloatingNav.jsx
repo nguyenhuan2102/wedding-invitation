@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const FloatingButton = () => {
@@ -29,7 +29,7 @@ const FloatingButton = () => {
             href="#about-us"
             className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
           >
-            About Us
+            Về chúng tôi
           </a>
           <a
             href="#video-section"
@@ -41,37 +41,43 @@ const FloatingButton = () => {
             href="#countdown"
             className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
           >
-            Countdown
+            Đếm ngược
           </a>
           <a
             href="#event-details"
             className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
           >
-            Event Details
+            Thông tin sự kiện
           </a>
           <a
             href="#gallery"
             className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
           >
-            Gallery
+            Album ảnh
           </a>
           <a
             href="#sending-directly"
             className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
           >
-            Sending Directly
+            Gửi quà mừng trực tiếp
           </a>
           <a
             href="#rsvp"
             className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
           >
-            RSVP
+            Tham dự
           </a>
           <a
             href="#testimonials"
             className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
           >
-            Testimonials
+            Lời chúc
+          </a>
+          <a
+            href="#thank-you"
+            className="block px-4 py-2 text-[#fc8987] hover:bg-gray-200 transition-colors duration-300"
+          >
+            Lời cảm ơn
           </a>
         </div>
       )}

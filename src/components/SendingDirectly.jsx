@@ -1,17 +1,16 @@
-import React from "react";
 import { CreditCardIcon } from "@heroicons/react/24/solid";
-import "../style/SendingDirectly.css"; // Pastikan file CSS terhubung
+import "../style/SendingDirectly.css"; // Đảm bảo file CSS được liên kết
 
 const SendingDirectly = () => {
   const brideAccount = {
-    name: "Nama Mempelai Wanita",
-    bank: "Bank ABC",
+    name: "Nguyễn Thị A", // Tên cô dâu
+    bank: "Ngân hàng ABC",
     accountNumber: "1234 5678 9012 3456",
   };
 
   const groomAccount = {
-    name: "Nama Mempelai Pria",
-    bank: "Bank XYZ",
+    name: "Nguyễn Văn B", // Tên chú rể
+    bank: "Ngân hàng XYZ",
     accountNumber: "6543 2109 8765 4321",
   };
 
@@ -24,7 +23,7 @@ const SendingDirectly = () => {
       </div>
       <div className="flex justify-between mb-4">
         <h3 className="text-lg font-semibold tracking-wide">{account.bank}</h3>
-        <div className="text-sm italic">ATM Card</div>
+        <div className="text-sm italic">Thẻ ATM</div>
       </div>
       <div className="mb-6">
         <p className="text-2xl font-bold tracking-wider">
@@ -33,7 +32,7 @@ const SendingDirectly = () => {
       </div>
       <div className="flex justify-between">
         <p className="text-lg">{account.name}</p>
-        <p className="text-sm">VALID THRU 12/28</p>
+        <p className="text-sm">HSD: 12/28</p>
       </div>
     </div>
   );
@@ -41,7 +40,7 @@ const SendingDirectly = () => {
   return (
     <div className="py-16 bg-gradient-to-b from-[#EDD0CD] to-[#F1DDDB] relative overflow-hidden">
       <h2 className="text-4xl font-extrabold text-center mb-12 text-[#C29897] relative z-10 tracking-wider animate-pulse">
-        Sending Directly
+        Gửi quà mừng trực tiếp
       </h2>
       <div className="max-w-lg mx-auto grid grid-cols-1 gap-10 relative z-10">
         {renderCard(brideAccount)}
@@ -58,9 +57,7 @@ const SendingDirectly = () => {
               width: `${Math.random() * 15 + 5}rem`,
               height: `${Math.random() * 15 + 5}rem`,
               opacity: Math.random(),
-              animation: `move ${
-                Math.random() * 20 + 10
-              }s infinite ease-in-out`,
+              animation: `move ${Math.random() * 20 + 10}s infinite ease-in-out`,
             }}
           >
             <svg

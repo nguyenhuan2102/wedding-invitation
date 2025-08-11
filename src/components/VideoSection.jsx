@@ -1,8 +1,7 @@
-import React from 'react';
 import "../style/VideoSection.css"; // Import the CSS file
 
 const VideoSection = () => {
-  const videoUrl = 'https://www.youtube.com/embed/3wDnIk5tuwY'; // URL embed YouTube
+  const videoUrl = 'https://www.youtube.com/embed/rIXhXaQ8tiM?si=G6aiq5MFFjfXuBs3'; // URL embed YouTube
 
   return (
     <div className="w-full flex items-center justify-center py-12 bg-[#F1DDDB] animate-fade-in">

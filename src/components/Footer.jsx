@@ -1,11 +1,11 @@
-import React from 'react';
 import "../style/Footer.css";
+
 const Footer = () => {
   return (
-    <footer className="bg-[#b28682] text-[#F1DDDB] py-8 relative overflow-hidden">
+    <footer className="bg-[#b28682] text-[#F1DDDB] py-2 relative overflow-hidden">
       <div className="container mx-auto text-center space-y-2">
-        <p className="text-lg">&copy; 2024 Wedding Invitation. All rights reserved.</p>
-        <p className="text-sm">Designed with love by [Your Name]</p>
+        <p className="text-lg">&copy; 2025 Thiệp mời cưới.</p>
+        <p className="text-sm">Thiết kế với tất cả yêu thương bởi Văn Huấn</p>
       </div>
       
       {/* Dekorasi Bunga di Footer */}

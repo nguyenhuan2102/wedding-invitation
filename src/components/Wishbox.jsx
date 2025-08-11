@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   SparklesIcon,
   PaperAirplaneIcon,
@@ -8,19 +8,16 @@ import {
 const WishBox = () => {
   const [wishList, setWishList] = useState([
     {
-      name: "John Doe",
-      message:
-        "Congratulations on your big day! Wishing you a lifetime of love and happiness.",
+      name: "Nguyễn Văn A",
+      message: "Chúc mừng ngày trọng đại của hai bạn! Chúc mãi mãi hạnh phúc bên nhau.",
     },
     {
-      name: "Jane Smith",
-      message:
-        "What a beautiful journey you two have started together. Best wishes!",
+      name: "Trần Thị B",
+      message: "Chúc hai bạn trăm năm hạnh phúc, vạn sự như ý!",
     },
     {
-      name: "Emily Johnson",
-      message:
-        "So happy for you both! Can’t wait to celebrate your special day.",
+      name: "Lê Văn C",
+      message: "Thật vui khi được chung vui cùng hai bạn! Chúc hạnh phúc viên mãn.",
     },
   ]);
 
@@ -37,7 +34,7 @@ const WishBox = () => {
     }
   };
 
-  // Love effect within WishBox component
+  // Hiệu ứng trái tim trong WishBox
   useEffect(() => {
     const createLoveEffect = () => {
       const loveContainer = document.createElement("div");
@@ -69,7 +66,6 @@ const WishBox = () => {
     };
 
     const cleanUp = createLoveEffect();
-
     return cleanUp;
   }, []);
 
@@ -83,11 +79,10 @@ const WishBox = () => {
         className="text-4xl font-extrabold text-center mb-10 tracking-wider animate-pulse"
         style={{ color: "#C29897" }}
       >
-        <SparklesIcon className="h-8 w-8 inline-block text-pink-400 mr-2" />{" "}
-        Wish Box
+        <SparklesIcon className="h-8 w-8 inline-block text-pink-400 mr-2" /> Hộp lời chúc
       </h2>
 
-      {/* Formulir Input */}
+      {/* Form nhập lời chúc */}
       <div
         className="max-w-lg mx-auto p-6 shadow-2xl rounded-xl mb-10"
         style={{ backgroundColor: "#EDD0CD", backdropFilter: "blur(10px)" }}
@@ -96,8 +91,7 @@ const WishBox = () => {
           className="text-2xl font-bold mb-4 flex items-center"
           style={{ color: "#C29897" }}
         >
-          <PaperAirplaneIcon className="h-6 w-6 text-pink-400 mr-2" /> Add Your
-          Wish
+          <PaperAirplaneIcon className="h-6 w-6 text-pink-400 mr-2" /> Gửi lời chúc của bạn
         </h3>
         <form onSubmit={handleAddWish} className="space-y-4">
           <div>
@@ -106,7 +100,7 @@ const WishBox = () => {
               className="block text-lg font-semibold"
               style={{ color: "#C29897" }}
             >
-              Your Name
+              Tên của bạn
             </label>
             <input
               id="name"
@@ -115,7 +109,7 @@ const WishBox = () => {
               onChange={(e) => setNewName(e.target.value)}
               className="w-full px-4 py-3 border rounded-lg text-gray-800 placeholder-[#C29897] focus:ring-2 focus:ring-pink-200 focus:outline-none"
               style={{ backgroundColor: "#ffffff", borderColor: "#C29897" }}
-              placeholder="Enter your name"
+              placeholder="Nhập tên của bạn"
               required
             />
           </div>
@@ -125,7 +119,7 @@ const WishBox = () => {
               className="block text-lg font-semibold"
               style={{ color: "#C29897" }}
             >
-              Your Message
+              Lời chúc
             </label>
             <textarea
               id="message"
@@ -134,7 +128,7 @@ const WishBox = () => {
               onChange={(e) => setNewMessage(e.target.value)}
               className="w-full px-4 py-3 border rounded-lg text-gray-800 placeholder-[#C29897] focus:ring-2 focus:ring-pink-200 focus:outline-none"
               style={{ backgroundColor: "#ffffff", borderColor: "#C29897" }}
-              placeholder="Write your message here"
+              placeholder="Nhập lời chúc của bạn..."
               required
             />
           </div>
@@ -143,12 +137,12 @@ const WishBox = () => {
             className="w-full py-3 text-white font-bold rounded-lg shadow-lg transition-transform transform hover:scale-105"
             style={{ backgroundColor: "#C29897" }}
           >
-            Send Wish
+            Gửi lời chúc
           </button>
         </form>
       </div>
 
-      {/* Display Wishes */}
+      {/* Danh sách lời chúc */}
       <div className="max-w-lg mx-auto grid grid-cols-1 gap-6">
         {wishList.map((wish, index) => (
           <div
@@ -161,7 +155,7 @@ const WishBox = () => {
             }}
           >
             <p className="text-lg mb-3" style={{ color: "#4B2E39" }}>
-              "{wish.message}"
+              &quot;{wish.message}&quot;
             </p>
             <p
               className="text-md font-semibold text-right"

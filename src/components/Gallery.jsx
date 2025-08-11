@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -51,7 +51,7 @@ const Gallery = () => {
   return (
     <div className="gallery-container py-12 bg-[#f0f4f8] relative overflow-hidden">
       <h2 className="gallery-title text-4xl font-extrabold text-center mb-8 text-[#C29897] animate-fadeIn tracking-wider animate-pulse">
-        Gallery
+        Album ảnh
       </h2>
       <div className="relative max-w-6xl mx-auto">
         <button className="gallery-button prev-button" onClick={prevSlide}>
