@@ -77,7 +77,7 @@ const EventDetails = () => {
               <p className="text-xl font-semibold text-[#C29897]">{item.label}</p>
               <p className="text-lg text-[#D9B2AF]">{item.value}</p>
             </div>
-            <HeartIcon className="absolute top-0 right-0 h-12 w-12 text-pink-300 opacity-60 animate-love-rain" />
+            <HeartIcon className="absolute top-0 right-0 h-12 w-12 text-red-300 opacity-60 animate-love-rain" />
           </div>
         ))}
       </div>
@@ -101,7 +101,7 @@ const EventDetails = () => {
         {[...Array(15)].map((_, i) => (
           <HeartIcon
             key={i}
-            className="h-24 w-24 text-pink-300 opacity-50 absolute"
+            className="h-24 w-24 text-red-300 opacity-50 absolute"
             style={{
               top: `${Math.random() * 100}vh`,
               left: `${Math.random() * 100}vw`,

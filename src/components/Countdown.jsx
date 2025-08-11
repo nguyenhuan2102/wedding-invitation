@@ -84,7 +84,7 @@ const Countdown = ({ targetDate }) => {
         {[...Array(10)].map((_, i) => (
           <HeartIcon
             key={i}
-            className="h-16 w-16 md:h-24 md:w-24 text-pink-300 opacity-50 animate-love-rain absolute"
+            className="h-16 w-16 md:h-24 md:w-24 text-red-300 opacity-50 animate-love-rain absolute"
             style={{
               top: `${Math.random() * 100}vh`,
               left: `${Math.random() * 100}vw`,
